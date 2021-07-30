@@ -5,7 +5,9 @@
         border: 1px solid #000000;
 }
 
-
+hr.lie {
+	border: 2px dotted black;
+}
 .imagebg {
 	poistion: absolute;
 	background-image: linear-gradient(to bottom, rgba(46, 49, 49, .75), rgba(103, 128, 159, 0.73)), url("pool_img.jpg");
