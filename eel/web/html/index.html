@@ -21,7 +21,6 @@
   <body>
 
 
-
   <div class="jumbotron text-center text-white imagebg">
     <h1>automatic renaming</h1>
     <p>As of 7/3: only works on tickets</p>
@@ -29,9 +28,11 @@
 
 
 <div class="container">
-  <div class="row">
+  <div id="dd" class="row">
 
-    <div class="col-sm-4">
+    
+
+  <div class="col-sm-4">
       <button onclick= "location.href = 'gail_choice.html';">
         <h3>Run on Gail Folder</h3>
         <p>Uses common presets...</p>
@@ -51,16 +52,41 @@
         <p>Get data, see errors...</p>
       </button>
     </div>
-
-  </div>
 </div>
+ 
+</div>
+     
+
+     
+    <script  src="/eel.js"></script>
+    <script>
+
+    async function run() {
+       let count = await eel.get_task_length()();
+
+       for (let i = 0; i < count; i++) {
+          let n = await eel.get_rows(i)();
+          console.log('Got this from Python: ' + n);
+          // document.getElementById("demo").innerHTML += n[0];
+          document.getElementById("dd").innerHTML += ` <div class="col-sm-4">
+      <button onclick= "location.href = 'gail_choice.html';">
+        <h3>`+n[0]+`</h3>
+        <p>`+n[1]+`</p>
+      </button>
+    </div>`;
+    }
+   
+    }
+    run();
+      
+    </script>
+
 
 
 
     <!-- Including Bootstrap JS (with its jQuery dependency) so that dynamic components work -->
-    <script type="text/javascript" src="/eel.js"></script>
+
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/script.js"></script>
   </body>
 </html>
