@@ -23,9 +23,9 @@ def get_task_length():
 		return i[0]
 
 @eel.expose 
-def get_rows(num, command='SELECT task, creator, due_at, description, status_id, users_assigned1 from tasks;', where=''):
+def get_rows(num, command='SELECT task, creator, due_at, description, status_id, users_assigned1, id from tasks where status_id = 1;'):
 	lines = []
-	for row in cur.execute(command + where):
+	for row in cur.execute(command):
 		lines.append(row)
 	return lines[num]
 

@@ -63,3 +63,16 @@ button:hover {
 .gn {
 	background-color: mediumseagreen; /*darkseagreen*/
 }
+
+.rd-txt {
+	color: tomato; /*indianred*/
+	font-weight: bold;
+}
+.bl-txt {
+	color: dodgerblue; /*cadetblue*/
+	font-weight: bold;
+}
+.gn-txt {
+	color: mediumseagreen; /*darkseagreen*/
+	font-weight: bold;
+}
