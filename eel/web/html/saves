@@ -1,0 +1,16 @@
+document.getElementById("dd").innerHTML += ` 
+  <hr class="lie">
+  <div  class="row rw-bg">
+    <div class="col-sm-4">
+      <h5>`+n[5]+`:</h5>
+      <p>`+n[4]+`</p>
+    </div>
+    <div class="col-sm-4">
+      <p><b>`+n[0]+`</b></p>
+      <p>`+n[3]+`</p>
+    </div>
+    <div class="col-sm-4">     
+      <p>Due: `+n[2]+`</p>        
+      <p>Created by: `+n[1]+`</p>     
+    </div>
+  </div>`

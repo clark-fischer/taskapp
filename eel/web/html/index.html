@@ -15,21 +15,40 @@
 
 
   <div class="jumbotron text-center text-white imagebg">
-    <h1>automatic renaming</h1>
-    <p>As of 7/3: only works on tickets</p>
+    <h1>uncompleted tasks</h1>
+    
   </div>
 
-  <div id="dd" class="container">
+
+
+
+ <div class="wrapper">
+   <div></div>
+   <button class="chld rd" onclick= "location.href = 'new_task.html';">New Task</button>
+   <button class="chld bl" onclick= "location.href = 'new_task.html';">Search</button>
+   <button class="chld gn" onclick= "location.href = 'new_task.html';">All Tasks</button> 
+   <div></div>
+ </div>
+
+<div id="dd" class="container"></div>
+
+<!-- <div id="dd" class="container">
+  <hr class="lie">
+  <div  class="row rw-bg">
     <div class="col-sm-4">
-      <button onclick= "location.href = 'settings.html';">
-        <h3>Customize Settings</h3>
-        <p>Change folder/process</p>
-      </button>
+      <h5>Clark:</h5>
+      <p>smmm</p>
+    </div>
+    <div class="col-sm-4">
+      <p><b>sdf</b></p>
+      <p>dfg</p>
+    </div>
+    <div class="col-sm-4">     
+      <p>Due: sdfsdf</p>        
+      <p>Created by: sdfsdfsd</p>     
     </div>
   </div>
-
-<div id="dd" class="container">
-</div>
+</div> -->
   
     <script  src="/eel.js"></script>
     <script>
@@ -40,22 +59,38 @@
        for (let i = 0; i < count; i++) {
           let n = await eel.get_rows(i)();
           console.log('Got this from Python: ' + n);
+          if (n[3].length > 25) {
           document.getElementById("dd").innerHTML += ` 
-  <hr class="lie">
-  <div  class="row">
-    <div class="col-sm-4">
-      <h5>`+n[5]+`:</h5>
-      <p>`+n[4]+`</p>
-    </div>
-    <div class="col-sm-4">
-      <p><b>`+n[0]+`</b></p>
-      <p>`+n[3]+`</p>
-    </div>
-    <div class="col-sm-4">     
-      <p>Due: `+n[2]+`</p>        
-      <p>Created by: `+n[1]+`</p>     
-    </div>
-  </div>`;
+          <hr class="lie">
+          <div  class="row rw-bg">
+            <div class="col-sm-4">
+              <h5>`+n[5]+`:</h5>
+              <p>`+n[4]+`</p>
+            </div>
+            <div class="col-sm-4">
+              <p><b>`+n[0]+`</b></p>
+            </div>
+            <div class="col-sm-4">     
+              <p>Due: `+n[2]+`</p>        
+              <p>Created by: `+n[1]+`</p>     
+            </div>
+          </div><p>`+n[3]+`</p>`;} else { 
+          document.getElementById("dd").innerHTML += ` 
+          <hr class="lie">
+          <div  class="row rw-bg">
+            <div class="col-sm-4">
+              <h5>`+n[5]+`:</h5>
+              <p>`+n[4]+`</p>
+            </div>
+            <div class="col-sm-4">
+              <p><b>`+n[0]+`</b></p>
+              <p>`+n[3]+`</p>
+            </div>
+            <div class="col-sm-4">     
+              <p>Due: `+n[2]+`</p>        
+              <p>Created by: `+n[1]+`</p>     
+            </div>
+          </div>`;}
     }
    
     }

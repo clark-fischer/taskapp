@@ -11,15 +11,13 @@ hr.lie {
 .imagebg {
 	poistion: absolute;
 	background-image: linear-gradient(to bottom, rgba(46, 49, 49, .75), rgba(103, 128, 159, 0.73)), url("pool_img.jpg");
-
+	height: 7em;
 }
 
 button {
 	text-align: center;
 	transition: background 0.2s ease-in-out;
-	padding-top: 1em;
-
-		border: none;
+	border: none;
 }
 
 button:hover {
@@ -36,4 +34,32 @@ button:hover {
 .open:hover {
 	color: white;
 	background-color: #343a40;
+}
+.rw-bg {
+	padding: 1em;
+	background-color: #eeeeee;
+	border-radius: 10px;
+}
+
+.wrapper {
+	display: grid;
+	grid-template-columns: .5fr 1fr 1fr 1fr .5fr;
+	column-gap: 50px;
+}
+
+.chld {
+	color: white;
+	
+}
+
+/*https://www.scribd.com/document/391406907/HTML-Color*/
+
+.rd {
+	background-color: tomato; /*indianred*/
+}
+.bl {
+	background-color: dodgerblue; /*cadetblue*/
+}
+.gn {
+	background-color: mediumseagreen; /*darkseagreen*/
 }
