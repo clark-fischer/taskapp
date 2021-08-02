@@ -81,24 +81,23 @@
     <script>
 
     async function run() {
-       let count = await eel.get_task_length()();
+       var lencount = await eel.get_task_length()();
 
-       for (let i = 0; i < count; i++) {
+       for (let i = 0; i < lencount; i++) {
           let n = await eel.get_rows(i)();
           console.log('Got this from Python: ' + n);
           if (n[3].length > 25) {
           document.getElementById("dd").innerHTML += ` 
           <hr class="lie">
-          <div  class="row rw-bg">
-                      
+          <div  class="row rw-bg">     
             <div class="col-sm-4">
               <h5>`+n[5]+`:</h5>
               <p>`+n[4]+`</p>
-              <input  type="radio" id="Complete" name="`+n[6]+`"> 
-              <label for="Complete" class="gn-txt">Complete</label>
+              <input  type="radio" onclick="alert('hello');" id="Complete`+n[6]+`" name="`+n[6]+`"> 
+              <label for="Complete`+n[6]+`" class="gn-txt">Complete</label>
               <br>
-              <input class="rd" type="radio" id="Incomplete" name="`+n[6]+`" checked> 
-              <label for="Incomplete" class="rd-txt">Incomplete</label>
+              <input class="rd" onclick="alert('hello');" type="radio" id="Incomplete`+n[6]+`" name="`+n[6]+`" checked> 
+              <label for="Incomplete`+n[6]+`" class="rd-txt">Incomplete</label>
             </div>
             <div class="col-sm-4">
               <p><b>`+n[0]+`</b></p>
@@ -114,11 +113,13 @@
             <div class="col-sm-4">
               <h5>`+n[5]+`:</h5>
               <p>`+n[4]+`</p>
-              <input  type="radio" id="Complete" name="`+n[6]+`"> 
-              <label for="Complete" class="gn-txt">Complete</label>
+              
+              <input  type="radio" onclick="alert('hello');"  id="Complete`+n[6]+`" name="`+n[6]+`"> 
+              <label for="Complete`+n[6]+`" class="gn-txt">Complete</label>
               <br>
-              <input class="rd" type="radio" id="Incomplete" name="`+n[6]+`" checked> 
-              <label for="Incomplete" class="rd-txt">Incomplete</label>
+              <input class="rd" type="radio" onclick="alert('hello');" id="Incomplete`+n[6]+`" name="`+n[6]+`" checked> 
+              <label for="Incomplete`+n[6]+`" class="rd-txt">Incomplete</label>
+              
             </div>
             <div class="col-sm-4">
               <p><b>`+n[0]+`</b></p>
@@ -133,7 +134,28 @@
    
     }
     run();
-      
+
+    
+
+    async function closingCode(num) {
+
+      var lencount = await eel.update_db(num)();
+
+    //   for (var i = 1; i < lencount; i++) {
+
+    //     if(document.getElementById('Complete' + i).checked) {
+
+    //       eel.hello();
+
+    //     } else if(document.getElementById('Incomplete' + i).checked) {
+
+    //       eel.println(i);
+    //     }
+            
+    //       }    
+    }
+
+    
     </script>
 
 
