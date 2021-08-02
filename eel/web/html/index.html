@@ -93,10 +93,10 @@
             <div class="col-sm-4">
               <h5>`+n[5]+`:</h5>
               <p>`+n[4]+`</p>
-              <input  type="radio" onclick="alert('hello');" id="Complete`+n[6]+`" name="`+n[6]+`"> 
+              <input  type="radio" onclick="set_to_complete(`+n[6]+`);" id="Complete`+n[6]+`" name="`+n[6]+`"> 
               <label for="Complete`+n[6]+`" class="gn-txt">Complete</label>
               <br>
-              <input class="rd" onclick="alert('hello');" type="radio" id="Incomplete`+n[6]+`" name="`+n[6]+`" checked> 
+              <input class="rd" onclick="set_to_incomplete(`+n[6]+`);" type="radio" id="Incomplete`+n[6]+`" name="`+n[6]+`" checked> 
               <label for="Incomplete`+n[6]+`" class="rd-txt">Incomplete</label>
             </div>
             <div class="col-sm-4">
@@ -114,10 +114,10 @@
               <h5>`+n[5]+`:</h5>
               <p>`+n[4]+`</p>
               
-              <input  type="radio" onclick="alert('hello');"  id="Complete`+n[6]+`" name="`+n[6]+`"> 
+              <input  type="radio" onclick="set_to_complete(`+n[6]+`);"  id="Complete`+n[6]+`" name="`+n[6]+`"> 
               <label for="Complete`+n[6]+`" class="gn-txt">Complete</label>
               <br>
-              <input class="rd" type="radio" onclick="alert('hello');" id="Incomplete`+n[6]+`" name="`+n[6]+`" checked> 
+              <input class="rd" type="radio" onclick="set_to_incomplete(`+n[6]+`);" id="Incomplete`+n[6]+`" name="`+n[6]+`" checked> 
               <label for="Incomplete`+n[6]+`" class="rd-txt">Incomplete</label>
               
             </div>
@@ -135,24 +135,14 @@
     }
     run();
 
-    
+    async function set_to_incomplete(num) {
+      var change = await eel.set_incomplete(num)();
+      console.log("passed this to python") 
+    }
 
-    async function closingCode(num) {
-
-      var lencount = await eel.update_db(num)();
-
-    //   for (var i = 1; i < lencount; i++) {
-
-    //     if(document.getElementById('Complete' + i).checked) {
-
-    //       eel.hello();
-
-    //     } else if(document.getElementById('Incomplete' + i).checked) {
-
-    //       eel.println(i);
-    //     }
-            
-    //       }    
+    async function set_to_complete(num) {
+      var change = await eel.set_complete(num)();
+      console.log("passed this to python") 
     }
 
     
