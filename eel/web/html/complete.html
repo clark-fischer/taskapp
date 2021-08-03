@@ -15,7 +15,7 @@
 
 
   <div class="jumbotron text-center text-white imagebg">
-    <h1>Uncompleted Tasks</h1>
+    <h1>Completed Tasks</h1>
     
   </div>
 
@@ -26,7 +26,7 @@
    <div></div>
    <button class="chld rd" onclick= "location.href = 'newtask.html';">New Task</button>
    <button class="chld bl" onclick= "location.href = 'search.html';">Search</button>
-   <button class="chld gn" onclick= "location.href = 'complete.html';">Complete Tasks</button> 
+   <button class="chld gn" onclick= "location.href = 'index.html';">Uncomplete Tasks</button> 
    <div></div>
  </div>
 
@@ -37,9 +37,10 @@
 
   async function run() {
    var incomplete_lencount = await eel.get_task_length(1)();
+   var complete_lencount = await eel.get_task_length(1)();
 
-   for (let i = 0; i < incomplete_lencount; i++) {
-    let n = await eel.get_rows(i)();
+   for (let i = 0; i < complete_lencount; i++) {
+    let n = await eel.get_complete_rows(i)();
     console.log('Got this from Python: ' + n);
     if (n[3].length > 25) {
       document.getElementById("dd").innerHTML += ` 
@@ -48,10 +49,10 @@
       <div class="col-sm-4">
       <h5>`+n[5]+`:</h5>
       <p>`+n[4]+`</p>
-      <input  type="radio" onclick="set_to_complete(`+n[6]+`);" id="Complete`+n[6]+`" name="`+n[6]+`"> 
+      <input  type="radio" onclick="set_to_complete(`+n[6]+`);" id="Complete`+n[6]+`" name="`+n[6]+`" checked> 
       <label for="Complete`+n[6]+`" class="gn-txt">Complete</label>
       <br>
-      <input class="rd" onclick="set_to_incomplete(`+n[6]+`);" type="radio" id="Incomplete`+n[6]+`" name="`+n[6]+`" checked> 
+      <input class="rd" onclick="set_to_incomplete(`+n[6]+`);" type="radio" id="Incomplete`+n[6]+`" name="`+n[6]+`" > 
       <label for="Incomplete`+n[6]+`" class="rd-txt">Incomplete</label>
       </div>
       <div class="col-sm-4">
@@ -69,10 +70,10 @@
         <h5>`+n[5]+`:</h5>
         <p>`+n[4]+`</p>
 
-        <input  type="radio" onclick="set_to_complete(`+n[6]+`);"  id="Complete`+n[6]+`" name="`+n[6]+`"> 
+        <input  type="radio" onclick="set_to_complete(`+n[6]+`);"  id="Complete`+n[6]+`" name="`+n[6]+`" checked> 
         <label for="Complete`+n[6]+`" class="gn-txt">Complete</label>
         <br>
-        <input class="rd" type="radio" onclick="set_to_incomplete(`+n[6]+`);" id="Incomplete`+n[6]+`" name="`+n[6]+`" checked> 
+        <input class="rd" type="radio" onclick="set_to_incomplete(`+n[6]+`);" id="Incomplete`+n[6]+`" name="`+n[6]+`" > 
         <label for="Incomplete`+n[6]+`" class="rd-txt">Incomplete</label>
 
         </div>
@@ -86,6 +87,7 @@
         </div>
         </div>`;}
       }
+
 
     }
     run();

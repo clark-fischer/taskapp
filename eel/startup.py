@@ -17,8 +17,8 @@ cur = con.cursor()
 for i in cur.execute("select * from tasks"):
 	print(i)
 @eel.expose
-def get_task_length():
-	n = cur.execute('SELECT MAX(id) from tasks')
+def get_task_length(num):
+	n = cur.execute('SELECT MAX(id) FROM tasks WHERE status_id = ' + str(num))
 	for i in n:
 		return i[0]
 
@@ -27,7 +27,20 @@ def get_rows(num, command='SELECT task, creator, due_at, description, status_id,
 	lines = []
 	for row in cur.execute(command):
 		lines.append(row)
-	return lines[num]
+	try:
+		return lines[num]
+	except:
+		pass
+
+@eel.expose 
+def get_complete_rows(num, command='SELECT task, creator, due_at, description, status_id, users_assigned1, id from tasks where status_id = 2;'):
+	lines = []
+	for row in cur.execute(command):
+		lines.append(row)
+	try:
+		return lines[num]
+	except:
+		pass
 
 @eel.expose 
 def hello():

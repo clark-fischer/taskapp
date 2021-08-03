@@ -44,7 +44,11 @@ button:hover {
 .wrapper {
 	display: grid;
 	grid-template-columns: .5fr 1fr 1fr 1fr .5fr;
-	column-gap: 50px;
+	column-gap: 25px;
+}
+
+.input_wrapper {
+	padding: 50px;
 }
 
 .chld {
