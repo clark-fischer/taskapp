@@ -15,7 +15,7 @@
 
 
   <div class="jumbotron text-center text-white imagebg">
-    <h1>Completed Tasks</h1>
+    <h1>Complete Tasks</h1>
     
   </div>
 
@@ -25,8 +25,8 @@
   <div class="wrapper">
    <div></div>
    <button class="chld rd" onclick= "location.href = 'newtask.html';">New Task</button>
-   <button class="chld bl" onclick= "location.href = 'search.html';">Search</button>
-   <button class="chld gn" onclick= "location.href = 'index.html';">Uncomplete Tasks</button> 
+   <button class="chld bl" onclick= "location.href = 'index.html';">Incomplete Tasks</button>
+   <button class="chld gn" onclick= "location.href = 'complete.html';">Complete Tasks</button> 
    <div></div>
  </div>
 
@@ -36,9 +36,10 @@
 <script>
 
   async function run() {
-   var incomplete_lencount = await eel.get_task_length(1)();
-   var complete_lencount = await eel.get_task_length(1)();
-
+   var incomplete_lencount = await eel.get_task_length_incomplete()();
+   var complete_lencount = await eel.get_task_length_complete()();
+   console.log(incomplete_lencount)
+   console.log(complete_lencount)
    for (let i = 0; i < complete_lencount; i++) {
     let n = await eel.get_complete_rows(i)();
     console.log('Got this from Python: ' + n);

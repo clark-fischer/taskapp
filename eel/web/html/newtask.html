@@ -21,7 +21,7 @@
   <div class="wrapper">
    <div></div>
    <button class="chld rd" onclick= "location.href = 'newtask.html';">New Task</button>
-   <button class="chld bl" onclick= "location.href = 'search.html';">Search</button>
+   <button class="chld bl" onclick= "location.href = 'index.html';">Incomplete Tasks</button>
    <button class="chld gn" onclick= "location.href = 'complete.html';">Complete Tasks</button> 
    <div></div>
  </div>
@@ -38,6 +38,8 @@
    <!-- <label for="due_at">Due At</label>  -->
    <input class="form-control" placeholder="Due At" type="date" id="due_at" name="due_at"><br>
  
+   <input class="form-control" placeholder="Description" type="text" id="description" name="description"><br>
+
    <!-- <label for="users_assigned1">Persons Involved</label> -->
    <input class="form-control" placeholder="Persons Involved" type="text" id="users_assigned1" name="users_assigned1"><br>
    
@@ -47,20 +49,28 @@
    <!-- <label for="users_assigned3">Persons Involved</label> -->
    <input class="form-control" placeholder="Persons Involved" type="text" id="users_assigned3" name="users_assigned3"><br>
 
-   <button type="submit" class="btn btn-primary">Submit</button>
+   <button onclick="run();" type="submit" id="finalsubmit" class="btn btn-primary">Submit</button>
   </div>
 
  </div>
 
  <script  src="/eel.js"></script>
  <script>
-
   async function run() {
-    var 
-  }
 
-  run();
-    
+    let task = document.getElementById('task').value
+    let creator = document.getElementById('creator').value
+    let due_at = document.getElementById('due_at').value
+    let description = document.getElementById('description').value
+    let users_assigned1 = document.getElementById('users_assigned1').value
+    let users_assigned2 = document.getElementById('users_assigned2').value
+    let users_assigned3 = document.getElementById('users_assigned3').value
+
+    var change = await eel.form_insert(task, creator, due_at, description, users_assigned1, users_assigned2, users_assigned3)();
+
+    location.href = 'index.html';
+  }    
+
   </script>
 
 
