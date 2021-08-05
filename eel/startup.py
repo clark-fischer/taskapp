@@ -2,6 +2,7 @@ import eel
 import os
 import sys
 import sqlite3
+from uuid import getnode as get_mac
 
 cwd = os.getcwd()
 rel_prefix = os.path.dirname(cwd)
@@ -39,7 +40,7 @@ def get_task_length_incomplete():
 		return i[0]
 
 @eel.expose 
-def get_rows(num, command='SELECT task, creator, due_at, description, status_id, users_assigned1, users_assigned2, users_assigned3, id  from tasks where status_id = 1;'):
+def get_incomplete_rows(num, command='SELECT task, address, town, field_manager, date_called_in, date_sent_to_cc, notes, id  from tasks where status_id = 1;'):
 	lines = []
 	for row in cur.execute(command):
 		lines.append(row)
@@ -49,7 +50,7 @@ def get_rows(num, command='SELECT task, creator, due_at, description, status_id,
 		pass
 
 @eel.expose 
-def get_complete_rows(num, command='SELECT task, creator, due_at, description, status_id, users_assigned1,  users_assigned2, users_assigned3,id from tasks where status_id = 2;'):
+def get_complete_rows(num, command='SELECT task, address, town, field_manager, date_called_in, date_sent_to_cc, notes, resolution, date_resolved, id from tasks where status_id = 2;'):
 	lines = []
 	for row in cur.execute(command):
 		lines.append(row)
@@ -57,6 +58,7 @@ def get_complete_rows(num, command='SELECT task, creator, due_at, description, s
 		return lines[num]
 	except:
 		pass
+		
 
 @eel.expose	
 def set_complete(num, command='UPDATE tasks SET status_id = 2 WHERE id = '):
@@ -71,13 +73,18 @@ def set_incomplete(num, command='UPDATE tasks SET status_id = 1 WHERE id = '):
 	con.commit()
 
 @eel.expose	
-def form_insert(task, creator, due_at, description, users_assigned1, users_assigned2, users_assigned3):
-	command = f"INSERT INTO tasks (task, creator, due_at, description, status_id, users_assigned1, users_assigned2, users_assigned3) values ('{task}', '{creator}', '{due_at}', '{description}', '1', '{users_assigned1}',  '{users_assigned2}', '{users_assigned3}'); "
+def form_insert(mac_address, task, address, town, field_manager, date_called_in, date_sent_to_cc, notes):
+	command = f"INSERT INTO tasks (mac_address, status_id, task, address, town, field_manager, date_called_in, date_sent_to_cc, notes, resolution, date_resolved) values ('{mac_address}', '1', '{task}', '{address}', '{town}', '{field_manager}', '{date_called_in}', '{date_sent_to_cc}',  '{notes}', null, null); "
 	
+	print(command)
+
 	cur.execute(command)
 	con.commit()
 
-
+@eel.expose
+def get_mac_address():
+	return get_mac()
+	
 eel.init(init)
 eel.start(index_page, size=(720, 720))
 
