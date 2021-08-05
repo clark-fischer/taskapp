@@ -15,9 +15,18 @@ cur = con.cursor()
 # cur.execute("CREATE TABLE tasks (id INTEGER PRIMARY KEY AUTOINCREMENT, task VARCHAR(255), creator VARCHAR(255), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL, due_at DATETIME, description VARCHAR(255), status_id INT, users_assigned1 VARCHAR(255), users_assigned2 VARCHAR(255), users_assigned3 VARCHAR(255));")
 # cur.execute("INSERT INTO tasks (task, creator, due_at, description, status_id, users_assigned1) values ('Create App3', 'James', '2021-07-31 12:00:00', 'Creating this very app!', '1', 'Clark'); ")
 
+  
 
 for i in cur.execute("select * from tasks"):
 	print(i)
+
+@eel.expose 
+def hello():
+	print('hello')
+
+@eel.expose
+def println(stuff):
+	print(stuff)
 
 @eel.expose
 def get_task_length_complete():
@@ -32,7 +41,7 @@ def get_task_length_incomplete():
 		return i[0]
 
 @eel.expose 
-def get_rows(num, command='SELECT task, creator, due_at, description, status_id, users_assigned1, id from tasks where status_id = 1;'):
+def get_rows(num, command='SELECT task, creator, due_at, description, status_id, users_assigned1, users_assigned2, users_assigned3, id  from tasks where status_id = 1;'):
 	lines = []
 	for row in cur.execute(command):
 		lines.append(row)
@@ -42,7 +51,7 @@ def get_rows(num, command='SELECT task, creator, due_at, description, status_id,
 		pass
 
 @eel.expose 
-def get_complete_rows(num, command='SELECT task, creator, due_at, description, status_id, users_assigned1, id from tasks where status_id = 2;'):
+def get_complete_rows(num, command='SELECT task, creator, due_at, description, status_id, users_assigned1,  users_assigned2, users_assigned3,id from tasks where status_id = 2;'):
 	lines = []
 	for row in cur.execute(command):
 		lines.append(row)
@@ -50,14 +59,6 @@ def get_complete_rows(num, command='SELECT task, creator, due_at, description, s
 		return lines[num]
 	except:
 		pass
-
-@eel.expose 
-def hello():
-	print('hello')
-
-@eel.expose
-def println(stuff):
-	print(stuff)
 
 @eel.expose	
 def set_complete(num, command='UPDATE tasks SET status_id = 2 WHERE id = '):

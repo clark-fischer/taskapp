@@ -29,19 +29,22 @@
 <div id="dd" class="input_wrapper">
 
   <div>
+    <form>
    <!-- <label for="task">Task</label> -->
-   <input class="form-control" placeholder="Task" type="text" id="task" name="task"><br>
+
+   <input class="form-control" placeholder="Task" type="text" id="task" name="task" required><br>
 
    <!-- <label for="creator">Creator</label> -->
-   <input class="form-control" placeholder="Creator" type="text" id="creator" name="creator"><br>
+   <input class="form-control" placeholder="Creator" type="text" id="creator" name="creator" required><br>
    
    <!-- <label for="due_at">Due At</label>  -->
-   <input class="form-control" placeholder="Due At" type="date" id="due_at" name="due_at"><br>
+   <input class="form-control" placeholder="Due At" type="datetime-local" id="due_at" name="due_at" required><br>
  
-   <input class="form-control" placeholder="Description" type="text" id="description" name="description"><br>
+   <!-- <input class="form-control" placeholder="Description" type="text" id="description" name="description"><br> -->
+   <textarea class="form-control" placeholder="Description" id="description" name="description" required></textarea><br>
 
    <!-- <label for="users_assigned1">Persons Involved</label> -->
-   <input class="form-control" placeholder="Persons Involved" type="text" id="users_assigned1" name="users_assigned1"><br>
+   <input class="form-control" placeholder="Persons Involved" type="text" id="users_assigned1" name="users_assigned1" required><br>
    
    <!-- <label for="users_assigned2">Persons Involved</label> -->
    <input class="form-control" placeholder="Persons Involved" type="text" id="users_assigned2" name="users_assigned2"><br>
@@ -50,6 +53,7 @@
    <input class="form-control" placeholder="Persons Involved" type="text" id="users_assigned3" name="users_assigned3"><br>
 
    <button onclick="run();" type="submit" id="finalsubmit" class="btn btn-primary">Submit</button>
+   </form>
   </div>
 
  </div>
@@ -66,9 +70,18 @@
     let users_assigned2 = document.getElementById('users_assigned2').value
     let users_assigned3 = document.getElementById('users_assigned3').value
 
-    var change = await eel.form_insert(task, creator, due_at, description, users_assigned1, users_assigned2, users_assigned3)();
+    
+    if (task == "" || creator == "" || due_at == "" || description == "" || users_assigned1 == "") {
 
-    location.href = 'index.html';
+      console.log("Someone's trying to leave out the juicy details.....");
+
+    } else {
+
+      var change = await eel.form_insert(task, creator, due_at, description, users_assigned1, users_assigned2, users_assigned3)();
+      location.href = 'index.html';
+      
+    }
+    
   }    
 
   </script>

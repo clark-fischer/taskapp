@@ -15,7 +15,7 @@
 
 
   <div class="jumbotron text-center text-white imagebg">
-    <h1>Complete Tasks</h1>
+    <h1>Completed Tasks</h1>
     
   </div>
 
@@ -25,8 +25,8 @@
   <div class="wrapper">
    <div></div>
    <button class="chld rd" onclick= "location.href = 'newtask.html';">New Task</button>
-   <button class="chld bl" onclick= "location.href = 'index.html';">Incomplete Tasks</button>
-   <button class="chld gn" onclick= "location.href = 'complete.html';">Complete Tasks</button> 
+   <button class="chld bl" onclick= "location.href = 'search.html';">Search</button>
+   <button class="chld gn" onclick= "location.href = 'index.html';">Uncomplete Tasks</button> 
    <div></div>
  </div>
 
@@ -34,6 +34,9 @@
 
 <script  src="/eel.js"></script>
 <script>
+
+  // n[0]    n[1]    n[2]       n[3]        n[4]         n[5]             n[6]             n[7]        n[8]
+  // task, creator, due_at, description, status_id, users_assigned1, users_assigned2, users_assigned3m, id
 
   async function run() {
    var incomplete_lencount = await eel.get_task_length_incomplete()();
@@ -46,49 +49,52 @@
     if (n[3].length > 25) {
       document.getElementById("dd").innerHTML += ` 
       <hr class="lie">
+      <h5>`+n[0]+`:</h5>
       <div  class="row rw-bg">     
       <div class="col-sm-4">
-      <h5>`+n[5]+`:</h5>
-      <p>`+n[4]+`</p>
-      <input  type="radio" onclick="set_to_complete(`+n[6]+`);" id="Complete`+n[6]+`" name="`+n[6]+`" checked> 
-      <label for="Complete`+n[6]+`" class="gn-txt">Complete</label>
+
+      <input  type="radio" onclick="set_to_complete(`+n[8]+`);" id="Complete`+n[8]+`" name="`+n[8]+`" checked> 
+      <label for="Complete`+n[8]+`" class="gn-txt">Complete</label>
       <br>
-      <input class="rd" onclick="set_to_incomplete(`+n[6]+`);" type="radio" id="Incomplete`+n[6]+`" name="`+n[6]+`" > 
-      <label for="Incomplete`+n[6]+`" class="rd-txt">Incomplete</label>
+      <input class="rd" onclick="set_to_incomplete(`+n[8]+`);" type="radio" id="Incomplete`+n[8]+`" name="`+n[8]+`" > 
+      <label for="Incomplete`+n[8]+`" class="rd-txt">Incomplete</label>
       </div>
-      <div class="col-sm-4">
-      <p><b>`+n[0]+`</b></p>
+      <div class="col-sm-4" style="text-align: center;">
+      <p><b>`+n[5]+`</b></p>
+      <p><b>`+n[6]+`</b></p>
+      <p><b>`+n[7]+`</b></p>
       </div>
       <div class="col-sm-4">     
       <p>Due: `+n[2]+`</p>        
       <p>Created by: `+n[1]+`</p>     
       </div>
-      </div><p>`+n[3]+`</p>`;} else { 
-        document.getElementById("dd").innerHTML += ` 
-        <hr class="lie">
-        <div  class="row rw-bg">
-        <div class="col-sm-4">
-        <h5>`+n[5]+`:</h5>
-        <p>`+n[4]+`</p>
+      <p>`+n[3]+`</p>
+      </div>`;} else { 
+      document.getElementById("dd").innerHTML += ` 
+      <hr class="lie">
+      <h5>`+n[0]+`:</h5>
+      <div  class="row rw-bg">
+      <div class="col-sm-4">
 
-        <input  type="radio" onclick="set_to_complete(`+n[6]+`);"  id="Complete`+n[6]+`" name="`+n[6]+`" checked> 
-        <label for="Complete`+n[6]+`" class="gn-txt">Complete</label>
-        <br>
-        <input class="rd" type="radio" onclick="set_to_incomplete(`+n[6]+`);" id="Incomplete`+n[6]+`" name="`+n[6]+`" > 
-        <label for="Incomplete`+n[6]+`" class="rd-txt">Incomplete</label>
+      <input  type="radio" onclick="set_to_complete(`+n[8]+`);"  id="Complete`+n[8]+`" name="`+n[8]+`" checked> 
+      <label for="Complete`+n[8]+`" class="gn-txt">Complete</label>
+      <br>
+      <input class="rd" type="radio" onclick="set_to_incomplete(`+n[8]+`);" id="Incomplete`+n[8]+`" name="`+n[8]+`" > 
+      <label for="Incomplete`+n[8]+`" class="rd-txt">Incomplete</label>
 
-        </div>
-        <div class="col-sm-4">
-        <p><b>`+n[0]+`</b></p>
-        <p>`+n[3]+`</p>
-        </div>
-        <div class="col-sm-4">     
-        <p>Due: `+n[2]+`</p>        
-        <p>Created by: `+n[1]+`</p>     
-        </div>
-        </div>`;}
+      </div>
+      <div class="col-sm-4" style="text-align: center;">
+      <p><b>`+n[5]+`</b></p>
+      <p><b>`+n[6]+`</b></p>
+      <p><b>`+n[7]+`</b></p>
+      <p>`+n[3]+`</p>
+      </div>
+      <div class="col-sm-4">     
+      <p>Due: `+n[2]+`</p>        
+      <p>Created by: `+n[1]+`</p>     
+      </div>
+      </div>`;}
       }
-
 
     }
     run();
@@ -102,12 +108,8 @@
       var change = await eel.set_complete(num)();
       console.log("passed this to python") 
     }
-
-    
+  
   </script>
-
-
-
 
   <!-- Including Bootstrap JS (with its jQuery dependency) so that dynamic components work -->
 
