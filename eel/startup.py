@@ -12,10 +12,8 @@ con = sqlite3.connect('app.db')
 cur = con.cursor()
 
 # cur.execute('DROP TABLE tasks')
-# cur.execute("CREATE TABLE tasks (id INTEGER PRIMARY KEY AUTOINCREMENT, task VARCHAR(255), creator VARCHAR(255), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL, due_at DATETIME, description VARCHAR(255), status_id INT, users_assigned1 VARCHAR(255), users_assigned2 VARCHAR(255), users_assigned3 VARCHAR(255));")
-# cur.execute("INSERT INTO tasks (task, creator, due_at, description, status_id, users_assigned1) values ('Create App3', 'James', '2021-07-31 12:00:00', 'Creating this very app!', '1', 'Clark'); ")
-
-  
+# cur.execute("CREATE TABLE tasks (id INTEGER PRIMARY KEY AUTOINCREMENT, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL, mac_address VARCHAR(255), status_id INT, task VARCHAR(255), address VARCHAR(255), town VARCHAR(255), field_manager VARCHAR(255), date_called_in DATETIME, date_sent_to_cc DATETIME, notes VARCHAR(255), resolution VARCHAR(255), date_resolved DATETIME);")
+# cur.execute("INSERT INTO tasks (task, address, town, field_manager, date_called_in, date_sent_to_cc, notes, resolution, date_resolved) values ('Create App3', 'James', '2021-07-31 12:00:00', 'Creating this very app!', '1', 'Clark'); ")
 
 for i in cur.execute("select * from tasks"):
 	print(i)
