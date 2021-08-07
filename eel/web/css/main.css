@@ -80,3 +80,38 @@ button:hover {
 	color: mediumseagreen; /*darkseagreen*/
 	font-weight: bold;
 }
+
+.accordion {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  transition: 0.4s;
+}
+
+.active, .accordion:hover {
+  background-color: #ccc; 
+}
+
+.panel {
+  padding: 0 18px;
+  display: none;
+  background-color: white;
+  overflow: hidden;
+}
+
+.postblock {
+	margin: 0px 10px 0px 10px;
+	border: 1rem solid;
+}
+
+.postwrapper {
+	display: grid;
+	grid-template-columns:  1fr 1fr 1fr .25fr 1fr;
+	column-gap: 25px;
+}

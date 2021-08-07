@@ -7,7 +7,7 @@ from uuid import getnode as get_mac
 cwd = os.getcwd()
 rel_prefix = os.path.dirname(cwd)
 init = rel_prefix + r'\eel\web'
-index_page = init + r'\html\index.html'
+index_page = init + r'\html\tab_demo.html'
 
 con = sqlite3.connect('app.db')
 cur = con.cursor()
@@ -58,7 +58,6 @@ def get_complete_rows(num, command='SELECT task, address, town, field_manager, d
 		return lines[num]
 	except:
 		pass
-		
 
 @eel.expose	
 def set_complete(num, command='UPDATE tasks SET status_id = 2 WHERE id = '):
@@ -90,3 +89,11 @@ eel.start(index_page, size=(720, 720))
 
 con.commit()
 con.close()
+
+
+def set_status(idd, status):
+	command= f'UPDATE tasks SET status_id = {status} WHERE id = {idd};'
+
+	print(command)
+	cur.execute(command)
+	con.commit()
