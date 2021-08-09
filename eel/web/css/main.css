@@ -1,117 +1,130 @@
 .logo {
-	        position: relative;
-        top: 0;
-        left: 0;
-        border: 1px solid #000000;
+    position: relative;
+    top: 0;
+    left: 0;
+    border: 1px solid #000000;
 }
 
 hr.lie {
-	border: 2px dotted black;
+    border: 2px dotted black;
 }
+
 .imagebg {
-	poistion: absolute;
-	background-image: linear-gradient(to bottom, rgba(46, 49, 49, .75), rgba(103, 128, 159, 0.73)), url("pool_img.jpg");
-	height: 7em;
+    poistion: absolute;
+    background-image: linear-gradient(to bottom, rgba(46, 49, 49, .75), rgba(103, 128, 159, 0.73)), url("pool_img.jpg");
+    height: 7em;
 }
 
 button {
-	text-align: center;
-	transition: background 0.2s ease-in-out;
-	border: none;
+    text-align: center;
+    transition: background 0.2s ease-in-out;
+    border: none;
 }
 
 button:hover {
-	color: white;
-	background-color: #343a40;
+    color: white;
+    background-color: #343a40;
 }
 
 .open {
-	text-align: center;
-	transition: background 0.2s ease-in-out;
-	padding-top: 1em;
+    text-align: center;
+    transition: background 0.2s ease-in-out;
+    padding-top: 1em;
 }
 
 .open:hover {
-	color: white;
-	background-color: #343a40;
+    color: white;
+    background-color: #343a40;
 }
+
 .rw-bg {
-	padding: 1em;
-	background-color: #eeeeee;
-	border-radius: 10px;
+    padding: 1em;
+    background-color: #eeeeee;
+    border-radius: 10px;
 }
 
 .wrapper {
-	display: grid;
-	grid-template-columns: .5fr 1fr 1fr 1fr .5fr;
-	column-gap: 25px;
+    display: grid;
+    grid-template-columns: .5fr 1fr 1fr 1fr .5fr;
+    column-gap: 25px;
 }
 
 .input_wrapper {
-	padding: 50px;
+    padding: 50px;
 }
 
 .chld {
-	color: white;
-	
+    color: white;
+
 }
 
 /*https://www.scribd.com/document/391406907/HTML-Color*/
 
 .rd {
-	background-color: tomato; /*indianred*/
+    background-color: tomato;
+    /*indianred*/
 }
+
 .bl {
-	background-color: dodgerblue; /*cadetblue*/
+    background-color: dodgerblue;
+    /*cadetblue*/
 }
+
 .gn {
-	background-color: mediumseagreen; /*darkseagreen*/
+    background-color: mediumseagreen;
+    /*darkseagreen*/
 }
 
 .rd-txt {
-	color: tomato; /*indianred*/
-	font-weight: bold;
+    color: tomato;
+    /*indianred*/
+    font-weight: bold;
 }
+
 .bl-txt {
-	color: dodgerblue; /*cadetblue*/
-	font-weight: bold;
+    color: dodgerblue;
+    /*cadetblue*/
+    font-weight: bold;
 }
+
 .gn-txt {
-	color: mediumseagreen; /*darkseagreen*/
-	font-weight: bold;
+    color: mediumseagreen;
+    /*darkseagreen*/
+    font-weight: bold;
 }
 
 .accordion {
-  background-color: #eee;
-  color: #444;
-  cursor: pointer;
-  padding: 18px;
-  width: 100%;
-  border: none;
-  text-align: left;
-  outline: none;
-  font-size: 15px;
-  transition: 0.4s;
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
 }
 
-.active, .accordion:hover {
-  background-color: #ccc; 
+.active,
+.accordion:hover {
+    background-color: #ccc;
 }
 
 .panel {
-  padding: 0 18px;
-  display: none;
-  background-color: white;
-  overflow: hidden;
+    padding: 0 18px;
+    display: none;
+    background-color: white;
+    overflow: hidden;
 }
 
 .postblock {
-	margin: 0px 10px 0px 10px;
-	border: 1rem solid;
+    margin: 0px 10px 0px 10px;
+    /*border: 1px dashed;*/
 }
 
 .postwrapper {
-	display: grid;
-	grid-template-columns:  1fr 1fr 1fr .25fr 1fr;
-	column-gap: 25px;
+    display: grid;
+    grid-template-columns: 1fr 1fr .8fr .45fr 1fr;
+    column-gap: 25px;
 }

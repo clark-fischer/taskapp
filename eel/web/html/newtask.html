@@ -1,101 +1,80 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <title>--- TODO ---</title>
-
-  <link rel="stylesheet" href="..\css\main.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/fontawesome.min.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>--- TODO ---</title>
+    <link rel="stylesheet" href="..\css\main.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/fontawesome.min.css">
 </head>
+
 <body>
+    <div class="jumbotron text-center text-white imagebg">
+        <h1>New Task</h1>
+    </div>
+    <div class="wrapper">
+        <div></div>
+        <button class="chld rd" onclick="location.href = 'newtask.html';">New Task</button>
+        <button class="chld bl" onclick="location.href = 'index.html';">Incomplete Tasks</button>
+        <button class="chld gn" onclick="location.href = 'complete.html';">Complete Tasks</button>
+        <div></div>
+    </div>
+    <div id="dd" class="input_wrapper">
+        <div>
+            <form>
+                <!-- <label for="task">Task</label> -->
+                <input class="form-control" placeholder="Task" type="text" id="task" name="task" required><br>
+                <!-- <label for="creator">Creator</label> -->
+                <input class="form-control" placeholder="Address" type="text" id="address" name="address" required><br>
+                <input class="form-control" placeholder="Town" type="text" id="town" name="town" required><br>
+                <select class="form-control" id="field_manager">
+                    <option disabled selected>Select a Field Manager</option>
+                    <option>Uriel</option>
+                    <option>Nigel</option>
+                    <option>Chris</option>
+                    <option>Jason</option>
+                </select><br>
+                <label for="date_called_in">Date Called In</label>
+                <input class="form-control" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Date Called In" type="datetime-local" id="date_called_in" name="date_called_in" required><br>
+                <label for="date_sent_to_cc">Date Sent To CC</label>
+                <input class="form-control" placeholder="Date Sent To CC" type="datetime-local" onfocus="(this.type='date')" onblur="(this.type='text')" id="date_sent_to_cc" name="date_sent_to_cc" required><br>
+                <!-- <input class="form-control" placeholder="Description" type="text" id="description" name="description"><br> -->
+                <textarea class="form-control" placeholder="Notes" id="notes" name="notes" required></textarea><br>
+                <button onclick="run();" type="submit" id="finalsubmit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+    <script src="/eel.js"></script>
+    <script>
+    async function run() {
+        let mac_address = await eel.get_mac_address()();
+        let task = document.getElementById('task').value
+        let address = document.getElementById('address').value
+        let town = document.getElementById('town').value
+        let field_manager = document.getElementById('field_manager').value
+        let date_called_in = document.getElementById('date_called_in').value
+        let date_sent_to_cc = document.getElementById('date_sent_to_cc').value
+        let notes = document.getElementById('notes').value
 
+        console.log("Someone's trying to l..");
+        if (task == "" || address == "" || town == "" || field_manager == "" || date_sent_to_cc == "" || date_sent_to_cc == "" || notes == "") {
 
-  <div class="jumbotron text-center text-white imagebg">
-    <h1>New Task</h1>
-  </div>
+            console.log("Someone's trying to leave out the juicy details.....");
 
-  <div class="wrapper">
-   <div></div>
-   <button class="chld rd" onclick= "location.href = 'newtask.html';">New Task</button>
-   <button class="chld bl" onclick= "location.href = 'index.html';">Incomplete Tasks</button>
-   <button class="chld gn" onclick= "location.href = 'complete.html';">Complete Tasks</button> 
-   <div></div>
- </div>
+        } else {
 
-<div id="dd" class="input_wrapper">
+            var change = await eel.form_insert(mac_address, task, address, town, field_manager, date_called_in, date_sent_to_cc, notes)();
+            location.href = 'index.html';
 
-  <div>
-    <form>
-   <!-- <label for="task">Task</label> -->
+        }
 
-   <input class="form-control" placeholder="Task" type="text" id="task" name="task" required><br>
-
-   <!-- <label for="creator">Creator</label> -->
-   <input class="form-control" placeholder="Address" type="text" id="address" name="address" required><br>
-   
-  <input class="form-control" placeholder="Town" type="text" id="town" name="town" required><br>
-
-   <select class="form-control" id="field_manager">
-    <option disabled selected>Select a Field Manager</option>
-    <option>Uriel</option>
-    <option>Nigel</option>
-    <option>Chris</option>
-    <option>Jason</option>
-  </select><br>
-
-   <label for="date_called_in">Date Called In</label>
-   <input class="form-control" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Date Called In" type="datetime-local" id="date_called_in" name="date_called_in" required><br>
-
-   <label for="date_sent_to_cc">Date Sent To CC</label>
-   <input class="form-control" placeholder="Date Sent To CC" type="datetime-local" onfocus="(this.type='date')" onblur="(this.type='text')" id="date_sent_to_cc" name="date_sent_to_cc" required><br>
- 
-   <!-- <input class="form-control" placeholder="Description" type="text" id="description" name="description"><br> -->
-   <textarea class="form-control" placeholder="Notes" id="notes" name="notes" required></textarea><br>
-
-   <button onclick="run();" type="submit" id="finalsubmit" class="btn btn-primary">Submit</button>
-   </form>
-  </div>
-
- </div>
-
- <script  src="/eel.js"></script>
- <script>
-  async function run() {
-    let mac_address = await eel.get_mac_address()();
-    let task = document.getElementById('task').value
-    let address = document.getElementById('address').value
-    let town = document.getElementById('town').value
-    let field_manager = document.getElementById('field_manager').value
-    let date_called_in = document.getElementById('date_called_in').value
-    let date_sent_to_cc = document.getElementById('date_sent_to_cc').value
-    let notes = document.getElementById('notes').value
-
-    console.log("Someone's trying to l..");
-    if (task == "" || address == "" || town == "" || field_manager == "" || date_sent_to_cc == "" || date_sent_to_cc == "" || notes == "") {
-
-      console.log("Someone's trying to leave out the juicy details.....");
-
-    } else {
-
-      var change = await eel.form_insert(mac_address, task, address, town, field_manager, date_called_in, date_sent_to_cc, notes)();
-      location.href = 'index.html';
-      
     }
-    
-  }    
-
-  </script>
-
-
-
-
-
-
-  <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    </script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
+
 </html>
