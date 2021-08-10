@@ -27,7 +27,7 @@
     <div id="populateField"></div>
     <script src="/eel.js"></script>
     <script>
-    // n[0]    n[1]    n[2]      n[3]          n[4]               n[5]       n[6]  n[7]  
+    //getFunc[i][0]   getFunc[i][1]   getFunc[i][2]     getFunc[i][3]         getFunc[i][4]              getFunc[i][5]      getFunc[i][6] getFunc[i][7]  
     //  task, address, town, field_manager, date_called_in, date_sent_to_cc, notes, id
 
     function openCity(cityName, iid) {
@@ -47,15 +47,15 @@
 
     async function populate() {
 
-        let incomplete_lencount = await eel.get_task_length(1)();
+        let getFunc = await eel.get_status_rows(1)();
 
-        for (let i = 0; i < incomplete_lencount; i++) {
-            let n = await eel.get_status_rows(i, 1)();
+        for (let i = 0; i < getFunc.length; i++) {
+            
 
             field = `<br>
     <!-- <hr class="lie"> -->
     <div class="postblock">
-      <h5 style="text-align: center;">` + n[0] + `:</h5> 
+      <h5 style="text-align: center;">${getFunc[i][0]}:</h5> 
 
     <div class="postblock postwrapper" style="color:#fff;background-color:#34495e">
       <button class="w3-bar-item w3-button" onclick="openCity('London${i}', '${i}')">| Description |</button>
@@ -73,23 +73,23 @@
       <div class="col-sm-4">
       
 
-      <!-- <input  type="radio" onclick="set_to_complete(` + n[7] + `);" id="Complete` + n[7] + `" name="` + n[7] + `"> 
-      <label for="Complete` + n[7] + `" class="gn-txt">Complete</label>
+      <!-- <input  type="radio" onclick="set_to_complete(${getFunc[i][7]});" id="Complete${getFunc[i][7]}" name="${getFunc[i][7]}"> 
+      <label for="Complete${getFunc[i][7]}" class="gn-txt">Complete</label>
       <br>
-      <input class="rd" onclick="set_to_incomplete(` + n[7] + `);" type="radio" id="Incomplete` + n[7] + `" name="` + n[7] + `" checked> 
-      <label for="Incomplete` + n[7] + `" class="rd-txt">Incomplete</label> -->
-      <p><b>` + n[3] + `</b></p>
+      <input class="rd" onclick="set_to_incomplete(${getFunc[i][7]});" type="radio" id="Incomplete${getFunc[i][7]}" name="${getFunc[i][7]}" checked> 
+      <label for="Incomplete${getFunc[i][7]}" class="rd-txt">Incomplete</label> -->
+      <p><b>${getFunc[i][3]}</b></p>
       </div>
       <div class="col-sm-4" style="text-align: center;">
-      <p><b>` + n[1] + `</b></p>
-      <p><b>` + n[2] + `</b></p>
+      <p><b>${getFunc[i][1]}</b></p>
+      <p><b>${getFunc[i][2]}</b></p>
       
       </div>
       <div class="col-sm-4">     
-      <p>Called In: ` + n[4] + `</p>        
-      <p>Sent to CC: ` + n[5] + `</p>     
+      <p>Called In: ${getFunc[i][4]}</p>        
+      <p>Sent to CC: ${getFunc[i][5]}</p>     
       </div>
-      <p>` + n[6] + `</p>
+      <p>${getFunc[i][6]}</p>
       </div>
     </div>
 
@@ -102,7 +102,7 @@
       <label for="date_resolved${i}">Date Resolved</label>
       <input class="form-control" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Date Resolved" type="datetime-local" id="date_resolved${i}" name="date_resolved${i}" required><br>
 
-      <button onclick="submit(resolution${i}, date_resolved${i}, ${n[7]});" type="submit" id="finalsubmit" class="btn btn-primary">Submit</button>
+      <button onclick="submit(resolution${i}, date_resolved${i}, ${getFunc[i][7]});" type="submit" id="finalsubmit" class="btn btn-primary">Submit</button>
     </div>
 
     <div id="Tokyo${i}" class="w3-container city${i}" style="display:none">
@@ -112,7 +112,7 @@
 
     </div>
     </div>`;
-            console.log(field);
+
             document.getElementById("populateField").innerHTML += field;
         }
 

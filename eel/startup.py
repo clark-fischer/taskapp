@@ -49,7 +49,7 @@ def println(stuff):
     print(stuff)
 
 @eel.expose
-def get_status_rows(num, status_id, complete=False):
+def get_status_rows(status_id, complete=False):
     """takes a status_id and finds all rows with that status.
         those rows are then returned to the python function
     """
@@ -58,9 +58,14 @@ def get_status_rows(num, status_id, complete=False):
                      date_called_in, date_sent_to_cc, notes, id  
                      from tasks
                      where status_id = {status_id};"""
+    else:
+        command = f"""SELECT task, address, town, field_manager,
+                     date_called_in, date_sent_to_cc, notes, id, resolution, date_resolved  
+                     from tasks
+                     where status_id = {status_id};"""
                      
 
-    return list(cur.execute(command))[num]
+    return list(cur.execute(command))
 
 # @eel.expose
 # def get_status_rows(num):
@@ -72,16 +77,6 @@ def get_status_rows(num, status_id, complete=False):
 #                  where status_id = 2;"""
 
 #     return list(cur.execute(command))[num]
-
-@eel.expose
-def get_task_length(status_id):
-    """takes a status_id and finds all rows with that status.
-    those rows are then returned to the python function,
-    made into a list, and counted, finding the length
-    """
-    # 1 = uncomplete
-    # 2 = complete
-    return len(list(cur.execute(f"SELECT id FROM tasks WHERE status_id = {status_id}")))
 
 
 @eel.expose
@@ -138,12 +133,12 @@ def get_mac_address():
 def search(num, field):
     """Just searches every field for a given string, the field argument"""
     command = f"""SELECT task, address, town, field_manager, date_called_in,
-                  date_sent_to_cc, notes, resolution, date_resolved, id
+                  date_sent_to_cc, notes, id, resolution, date_resolved
                   from tasks where task LIKE "%{field}%" OR address LIKE "%{field}%" OR town LIKE "%{field}%" OR
                   field_manager LIKE "%{field}%" OR date_called_in LIKE "%{field}%" OR date_sent_to_cc LIKE "%{field}%" 
                   OR notes LIKE "%{field}%" OR resolution LIKE "%{field}%"
                   OR date_resolved LIKE "%{field}%";"""
-    return list(cur.execute(command))[num]
+    return list(cur.execute(command))
 
 
 eel.init(init)
