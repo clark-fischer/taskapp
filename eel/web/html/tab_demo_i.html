@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>--- TODO ---</title>
+    <link rel="stylesheet" href="..\css\main.css">
+    <link rel="stylesheet" href="..\css\mini_bootstrap.css">
+    <!--     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
+    <!--     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/fontawesome.min.css"> -->
+    <!--     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
+</head>
+
+<body>
+    <div class="jumbotron text-center text-white imagebg">
+        <h1>Uncompleted Tasks</h1>
+    </div>
+    <div class="wrapper">
+        <div></div>
+        <button class="chld rd" onclick="location.href = 'newtask.html';">New Task</button>
+        <button class="chld bl" onclick="location.href = 'search.html';">Search</button>
+        <button class="chld gn" onclick="location.href = 'tab_demo_c.html';">Complete Tasks</button>
+        <div></div>
+    </div>
+    <div id="populateField"></div>
+    <script src="/eel.js"></script>
+    <script>
+    // n[0]    n[1]    n[2]      n[3]          n[4]               n[5]       n[6]  n[7]  
+    //  task, address, town, field_manager, date_called_in, date_sent_to_cc, notes, id
+
+    function openCity(cityName, iid) {
+        let x = document.getElementsByClassName("city" + iid);
+        for (let i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        document.getElementById(cityName).style.display = "block";
+    }
+
+    function closeTabs(iid) {
+        let x = document.getElementsByClassName("city" + iid);
+        for (let i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+    }
+
+    async function populate() {
+
+        let incomplete_lencount = await eel.get_task_length(1)();
+
+        for (let i = 0; i < incomplete_lencount; i++) {
+            let n = await eel.get_status_rows(i, 1)();
+
+            field = `<br>
+    <!-- <hr class="lie"> -->
+    <div class="postblock">
+      <h5 style="text-align: center;">` + n[0] + `:</h5> 
+
+    <div class="postblock postwrapper" style="color:#fff;background-color:#34495e">
+      <button class="w3-bar-item w3-button" onclick="openCity('London${i}', '${i}')">| Description |</button>
+      <button class="w3-bar-item w3-button" onclick="openCity('Paris${i}', '${i}')">| Resolution |</button>
+      <button class="w3-bar-item w3-button" onclick="openCity('Tokyo${i}', '${i}')">| Notes |</button>
+      <div></div>
+
+      <button class="w3-bar-item w3-button" onclick="closeTabs('${i}')">| Minimize | &nbsp;</button>
+
+    </div>
+
+    <div id="London${i}" class="w3-container city${i}" style="display:none">
+      <div  class="row rw-bg">   
+
+      <div class="col-sm-4">
+      
+
+      <!-- <input  type="radio" onclick="set_to_complete(` + n[7] + `);" id="Complete` + n[7] + `" name="` + n[7] + `"> 
+      <label for="Complete` + n[7] + `" class="gn-txt">Complete</label>
+      <br>
+      <input class="rd" onclick="set_to_incomplete(` + n[7] + `);" type="radio" id="Incomplete` + n[7] + `" name="` + n[7] + `" checked> 
+      <label for="Incomplete` + n[7] + `" class="rd-txt">Incomplete</label> -->
+      <p><b>` + n[3] + `</b></p>
+      </div>
+      <div class="col-sm-4" style="text-align: center;">
+      <p><b>` + n[1] + `</b></p>
+      <p><b>` + n[2] + `</b></p>
+      
+      </div>
+      <div class="col-sm-4">     
+      <p>Called In: ` + n[4] + `</p>        
+      <p>Sent to CC: ` + n[5] + `</p>     
+      </div>
+      <p>` + n[6] + `</p>
+      </div>
+    </div>
+
+    <div id="Paris${i}" class="w3-container city${i}" style="display:none">
+    <br>
+
+      <h2>Resolution Description</h2>
+      <textarea name="" id="resolution${i}" cols="67" rows="3"></textarea>
+      <br>
+      <label for="date_resolved${i}">Date Resolved</label>
+      <input class="form-control" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Date Resolved" type="datetime-local" id="date_resolved${i}" name="date_resolved${i}" required><br>
+
+      <button onclick="submit(resolution${i}, date_resolved${i}, ${n[7]});" type="submit" id="finalsubmit" class="btn btn-primary">Submit</button>
+    </div>
+
+    <div id="Tokyo${i}" class="w3-container city${i}" style="display:none">
+    <br>
+      <h2>Further Notes</h2>
+      <p>Tokyo is the capital of Japan.</p>
+
+    </div>
+    </div>`;
+            console.log(field);
+            document.getElementById("populateField").innerHTML += field;
+        }
+
+    }
+
+    populate();
+
+    async function submit(resid, dateid, id) {
+
+        let resolution = resid.value;
+        let date_resolved = dateid.value;
+
+        if (resolution == "" || date_resolved == "") {
+            console.log("You can't submit an incomplete resolution....")
+        } else {
+            var change_status = await eel.set_status(id, 2)();
+            var change_row = await eel.final_insert(resolution, date_resolved, id)();
+
+            location.href = 'tab_demo_i.html'
+        }
+
+
+
+
+        console.log("passed this to python")
+    }
+    </script>
+    <!-- Including Bootstrap JS (with its jQuery dependency) so that dynamic components work -->
+    <!--     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> -->
+</body>
+
+</html>

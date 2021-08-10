@@ -7,20 +7,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>--- TODO ---</title>
     <link rel="stylesheet" href="..\css\main.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/fontawesome.min.css">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="..\css\mini_bootstrap.css">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/fontawesome.min.css"> -->
+    <!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
 </head>
 
 <body>
     <div class="jumbotron text-center text-white imagebg">
-        <h1>Uncompleted Tasks</h1>
+        <h1>Completed Tasks</h1>
     </div>
     <div class="wrapper">
         <div></div>
         <button class="chld rd" onclick="location.href = 'newtask.html';">New Task</button>
         <button class="chld bl" onclick="location.href = 'search.html';">Search</button>
-        <button class="chld gn" onclick="location.href = 'complete.html';">Complete Tasks</button>
+        <button class="chld gn" onclick="location.href = 'tab_demo_i.html';">Incomplete Tasks</button>
         <div></div>
     </div>
     <div id="populateField"></div>
@@ -46,10 +47,10 @@
 
     async function populate() {
 
-        let incomplete_lencount = await eel.get_task_length(1)();
+        let incomplete_lencount = await eel.get_task_length(2)();
 
         for (let i = 0; i < incomplete_lencount; i++) {
-            let n = await eel.get_incomplete_rows(i)();
+            let n = await eel.get_status_rows(i, 2)();
 
             field = `<br>
     <!-- <hr class="lie"> -->
@@ -111,20 +112,10 @@
     }
 
     populate();
-
-    async function set_to_incomplete(num) {
-        var change = await eel.set_incomplete(num)();
-        console.log("passed this to python")
-    }
-
-    async function set_to_complete(num) {
-        var change = await eel.set_complete(num)();
-        console.log("passed this to python")
-    }
     </script>
     <!-- Including Bootstrap JS (with its jQuery dependency) so that dynamic components work -->
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script> -->
+    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> -->
 </body>
 
 </html>

@@ -19,7 +19,7 @@
         <div></div>
         <button class="chld rd" onclick="location.href = 'newtask.html';">New Task</button>
         <button class="chld bl" onclick="location.href = 'search.html';">Search</button>
-        <button class="chld gn" onclick="location.href = 'index.html';">Uncomplete Tasks</button>
+        <button class="chld gn" onclick="location.href = 'tab_demo_i.html';">Uncomplete Tasks</button>
         <div></div>
     </div>
     <div id="dd" class="container"></div>
@@ -33,7 +33,7 @@
         var complete_lencount = await eel.get_task_length(2)();
 
         for (let i = 0; i < complete_lencount; i++) {
-            let n = await eel.get_complete_rows(i)();
+            let n = await eel.get_status_rows(i, 2)();
             console.log('Got this from Python: ' + n);
             if (n[3].length > 25) {
                 document.getElementById("dd").innerHTML += ` 
