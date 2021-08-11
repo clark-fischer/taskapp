@@ -35,18 +35,6 @@ def reset_table():
                 resolution VARCHAR(255), date_resolved DATETIME);""")
 
 
-@eel.expose
-def hello():
-    """only used as a test from js --> python"""
-    print("hello")
-
-
-@eel.expose
-def println(stuff):
-    """similarly used as a test from js --> python,
-    but now also allows for input to be tested as well
-    """
-    print(stuff)
 
 @eel.expose
 def get_status_rows(status_id, complete=False):
@@ -67,16 +55,6 @@ def get_status_rows(status_id, complete=False):
 
     return list(cur.execute(command))
 
-# @eel.expose
-# def get_status_rows(num):
-#     """takes a status_id and finds all rows with that status.
-#         those rows are then returned to the python function
-#     """
-#     command = f"""SELECT resolution, date
-#                  from tasks
-#                  where status_id = 2;"""
-
-#     return list(cur.execute(command))[num]
 
 
 @eel.expose
